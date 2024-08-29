@@ -1,0 +1,21 @@
+<div class="header">
+  <h2>My To Do List</h2>
+  <input [(ngModel)]="newTaskName" id="myInput" placeholder="Title..." (keydown.enter)="createTask(newTaskName)">
+
+  <!-- Filters -->
+  <div class="filters">
+    <button (click)="setFilter('all')" [class.active]="filter === 'all'">All</button>
+    <button (click)="setFilter('completed')" [class.active]="filter === 'completed'">Completed</button>
+    <button (click)="setFilter('notCompleted')" [class.active]="filter === 'notCompleted'">Not Completed</button>
+  </div>
+</div>
+
+<ul id="myUL">
+  @for (item of filteredToDoItems; track $index) {
+  <li [ngClass]="{'checked': item.isCompleted}" (click)="toggleTaskCompletion(item)">
+    <span>{{ item.task }}</span>
+    <span class="close" (click)="deleteTask(item.id)">×</span>
+  </li>
+  }
+
+</ul>
